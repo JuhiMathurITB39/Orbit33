@@ -1,0 +1,13 @@
+version: 2
+sources:
+  - name: orbit
+    schema: orbit
+    description: Star-schema warehouse loaded by the ORBIT pipeline (simulated unless data_kind = REAL_M5).
+    tables:
+      - {name: fact_sales}
+      - {name: fact_inventory}
+      - {name: fact_purchase_orders}
+      - {name: dim_product}
+      - {name: dim_store}
+      - {name: dim_supplier}
+      - {name: dim_date}

@@ -1,0 +1,13 @@
+.env
+data/
+__pycache__/
+*.pyc
+.pytest_cache/
+.ruff_cache/
+node_modules/
+frontend/dist/
+*.db
+*.joblib
+
+.venv/
+*.egg-info/

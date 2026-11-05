@@ -1,0 +1,14 @@
+version: 2
+models:
+  - name: mart_inventory_health
+    columns:
+      - {name: item_id, tests: [not_null]}
+      - {name: on_hand, tests: [not_null]}
+      - {name: days_of_cover, tests: [{dbt_utils.accepted_range: {min_value: 0}}]}
+    tests: [{dbt_utils.unique_combination_of_columns: {combination_of_columns: [item_id, store_id]}}]
+  - name: mart_supplier_scorecard
+    columns:
+      - {name: supplier_id, tests: [unique, not_null]}
+      - {name: late_rate, tests: [{dbt_utils.accepted_range: {min_value: 0, max_value: 1}}]}
+  - name: mart_sales_weekly
+    tests: [{dbt_utils.unique_combination_of_columns: {combination_of_columns: [wm_yr_wk, cat_id, store_id]}}]

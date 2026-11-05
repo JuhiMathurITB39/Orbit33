@@ -1,0 +1,14 @@
+# Local stack. Authored; not executed in the sandbox (no Docker daemon). Run `docker compose up --build`.
+services:
+  pipeline:            # builds the warehouse + models into the shared volume, then exits
+    build: .
+    command: ["sh", "-c", "python -m orbit.pipeline.run && python -m orbit.ml.train && python -m orbit.optim.run_backtest"]
+    volumes: ["orbit_data:/data"]
+  api:
+    build: .
+    depends_on: {pipeline: {condition: service_completed_successfully}}
+    ports: ["8000:8000"]
+    environment: {ORBIT_API_KEY: "${ORBIT_API_KEY:-}"}
+    volumes: ["orbit_data:/data"]
+volumes:
+  orbit_data:

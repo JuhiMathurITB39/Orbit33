@@ -1,0 +1,12 @@
+orbit:
+  target: dev
+  outputs:
+    dev:
+      type: postgres
+      host: "{{ env_var('ORBIT_PG_HOST', 'localhost') }}"
+      port: 5432
+      user: "{{ env_var('ORBIT_PG_USER') }}"
+      password: "{{ env_var('ORBIT_PG_PASSWORD') }}"
+      dbname: orbit
+      schema: orbit_marts
+      threads: 4
